@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "fifa-manager-3f507",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+
+
+

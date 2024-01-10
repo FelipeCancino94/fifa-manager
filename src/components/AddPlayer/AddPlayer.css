@@ -1,0 +1,28 @@
+.form-add-player {
+  grid-template-columns: 1fr 1fr;
+}
+
+.btn-show-form {
+  width: 40px;
+  height: 40px;
+}
+
+.btn-show-form span {
+  line-height: 1;
+}
+
+.add-player-content .form-add-player,
+.add-player-content .btn-show-form {
+  transition: all 200ms ease-in-out;
+}
+
+.add-player-content.show-form .form-add-player {
+  opacity: 1;
+  visibility: visible;
+}
+
+.add-player-content.show-form .btn-show-form {
+  background: transparent;
+  color: #fff;
+  transform: rotate(45deg);
+}
