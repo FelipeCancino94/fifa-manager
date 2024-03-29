@@ -27,22 +27,36 @@ function PlayersList() {
     <div className="px-2 mx-auto text-white">
       <h1 className="text-3xl">Plantilla</h1>
       <div className="players-list grid">
-        {players.map((player:any) => (
-          <div key={player.id} className="justify-between p-2 my-2 rounded-md border shadow shadow-white drop-shadow-2xl">
-            <div>
-              <h2 className="text-l"><span>{player.name}</span><span className="text-2xl"> {player.last_name}</span></h2>
-              <p className="text-sm mb-2">{player.position}</p>
+        <div className="grid grid-cols-12 py-2">
+          <p className="col-span-4 text-left pl-8">Nombre</p>
+          <p className="text-center">Edad</p>
+          <p className="col-span-2 text-center">Posicion</p>
+          <p className="text-center">
+            <span className="material-symbols-outlined">sports_soccer</span>
+          </p>
+          <p className="text-center">
+            <span className="material-symbols-outlined">pan_tool</span>
+          </p>
+          <p className="text-center">
+            <span className="material-symbols-outlined">sports_handball</span>
+          </p>
+          <p className="col-span-2 text-right pr-8">
+            Valor de mercado
+          </p>
+        </div>
+        {
+          players.map((player:any) => (
+            <div key={ player.id } className="grid grid-cols-12 py-2 player-item">
+              <p className="col-span-4 text-2xl leading-none"><span className="text-base pl-8">{ player.name }</span> { player.last_name }</p>
+              <p className="text-center">{ player.age }</p>
+              <p className="col-span-2 text-center">{ player.position }</p>
+              <p className="text-center">{ player.goals }</p>
+              <p className="text-center">{ player.assists }</p>
+              <p className="text-center">{ player.clean_goals }</p>
+              <p className="col-span-2 text-right pr-8">{ toCurrency(player.market_value) }</p>
             </div>
-            <div className="flex flex-row justify-around border-y mb-2">
-              <p>G: {player.goals}</p>
-              <p>A: {player.assists}</p>
-              <p>PI: {player.clean_goals}</p>
-            </div>
-            <div>
-              <p className="text-3xl text-center">{ toCurrency(player.market_value) }</p>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   );
