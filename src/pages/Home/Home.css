@@ -1,0 +1,8 @@
+.logo-team {
+  max-width: 200px;
+}
+
+.logo-team path {
+  stroke: #fff;
+  fill: transparent;
+}

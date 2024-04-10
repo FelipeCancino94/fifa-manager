@@ -1,0 +1,60 @@
+@keyframes hoverMenuBefore {
+  0% {
+    height: 2px;
+  }
+
+  50% {
+    width: 100%;
+    height: 2px;
+  }
+
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes hoverMenuAfter {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.menu ul li a {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu ul li a:before {
+  content: "";
+  width: 0;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.menu ul li a:hover:before {
+  animation: hoverMenuBefore 0.5s forwards;
+}
+
+.menu ul li a:after {
+  content: attr(title);
+  color: #091442;
+  position: absolute;
+  left: 1.25rem;
+  opacity: 0;
+}
+
+.menu ul li a:hover:after {
+  animation: hoverMenuAfter 0.5s forwards;
+}

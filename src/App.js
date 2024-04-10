@@ -1,13 +1,21 @@
-import PlayersList from './components/PlayersList/PlayersList.tsx';
-import AddPlayer from './components/AddPlayer/AddPlayer.tsx';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout/Layout.tsx";
+import Home from "./pages/Home/Home.tsx";
+import Seasons from "./pages/Seasons/Seasons.tsx";
+import Team from "./pages/Team/Team.tsx";
 import './App.css';
 
 function App() {
   return (
-    <div className="App bg-gradient-to-r from-[#0E1E5B] to-[#091442] h-screen">
-      <PlayersList />
-      <AddPlayer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="team" element={<Team />} />
+          <Route path="seasons" element={<Seasons />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
