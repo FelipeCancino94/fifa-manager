@@ -24,8 +24,8 @@ function PlayersList() {
   }, []);
 
   return (
-    <div className="px-2 mx-auto text-white">
-      <h1 className="text-3xl">Plantilla</h1>
+    <div className="px-5 mx-auto text-white">
+      <h1 className="text-white text-5xl mb-8">Plantilla</h1>
       <div className="players-list grid">
         <div className="grid grid-cols-12 py-2">
           <p className="col-span-4 text-left pl-8">Nombre</p>

@@ -1,8 +1,67 @@
 .logo-team {
   max-width: 200px;
+  width: 100%;
 }
 
 .logo-team path {
   stroke: #fff;
   fill: transparent;
+}
+
+.summary-container {
+  grid-template-columns: .5fr 1fr;
+}
+
+.summary-content {
+  grid-template-areas:
+    "seasons champions-cup champions-cup"
+    "seasons uefa-cup local-cup"
+    "seasons local-league local-league"
+    "seasons friendly-cup acronym";
+  grid-template-columns: .4fr 1fr 1fr;
+}
+
+.total-seasons {
+  grid-area: seasons;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, .2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-content > div:not(.total-seasons) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.local-league {
+  grid-area: local-league;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.local-cup {
+  grid-area: local-cup;
+}
+
+.champions-league {
+  grid-area: champions-cup;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.uefa-super-cup {
+  grid-area: uefa-cup;
+}
+
+.friendly-cups {
+  grid-area: friendly-cup;
+}
+
+.acronym-team {
+  grid-area: acronym;
+  justify-self: flex-end;
 }
