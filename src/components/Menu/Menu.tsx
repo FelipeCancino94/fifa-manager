@@ -16,6 +16,9 @@ function Menu() {
           <li>
             <Link to="/seasons" className="block p-5 text-white" title="Temporadas">Temporadas</Link>
           </li>
+          <li>
+            <Link to="/transfers" className="block p-5 text-white" title="Transferencias">Transferencias</Link>
+          </li>
         </ul>
       </nav>
 

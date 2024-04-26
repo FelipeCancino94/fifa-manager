@@ -20,7 +20,42 @@ function Seasons() {
             <span className="material-symbols-outlined text-4xl">expand_more</span>
           </div>
           <div className="season__content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odio culpa. Cumque, molestiae perspiciatis. Itaque labore repellendus nisi quibusdam similique? Natus voluptatum debitis excepturi sint dignissimos deleniti repellat blanditiis amet.</p>
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th>Competencia</th>
+                  <th>Posicion</th>
+                  <th>G</th>
+                  <th>GR</th>
+                  <th>Dif</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="barlow-bold">Champions</td>
+                  <td className="barlow-bold">Primera ronda</td>
+                  <td className="barlow-bold">8</td>
+                  <td className="barlow-bold">10</td>
+                  <td className="barlow-bold">-2</td>
+                </tr>
+                <tr>
+                  <td className="barlow-bold">Serie A</td>
+                  <td className="barlow-bold">2º</td>
+                  <td className="barlow-bold">30</td>
+                  <td className="barlow-bold">20</td>
+                  <td className="barlow-bold">10</td>
+                </tr>
+                <tr>
+                  <td className="barlow-bold">Copa italia</td>
+                  <td className="barlow-bold">
+                    <span className="material-symbols-outlined">trophy</span>
+                  </td>
+                  <td className="barlow-bold">30</td>
+                  <td className="barlow-bold">20</td>
+                  <td className="barlow-bold">10</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 

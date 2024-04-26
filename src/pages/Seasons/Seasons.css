@@ -38,6 +38,27 @@
 }
 
 .season.open .season__content {
-  max-height: 10rem;
+  max-height: 50rem;
   opacity: 1;
+}
+
+.season__content table thead tr,
+.season__content table tbody tr {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.season__content table thead tr,
+.season__content table tbody tr:nth-child(even) {
+  background: rgba(255,255,255,.2);
+}
+
+.season__content table thead tr th {
+  text-transform: uppercase;
+}
+
+.season__content table thead tr th,
+.season__content table tbody tr td {
+  text-align: right;
+  padding: 1rem .5rem;
 }
