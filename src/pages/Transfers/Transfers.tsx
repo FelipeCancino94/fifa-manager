@@ -4,27 +4,72 @@ import './Transfers.css';
 function Transfers() {
   return (
     <div className="transfers container mx-auto">
-      <h1 className="text-3xl text-left text-white px-5">
+      <h1 className="text-3xl text-left text-white px-5 flex items-center mb-8">
         Transferencias
-        <span className="material-symbols-outlined">
+        <span className="material-symbols-outlined pl-5 text-5xl">
           sync_alt
         </span>
       </h1>
       <div className="transfers_list">
         <div className="transfer_card text-white">
-          <div className="transfer_card__user">
+          <div className="transfer_card__user flex justify-center flex-col items-center">
             <span className="material-symbols-outlined text-8xl">
               face
             </span>
             <p>Jugador</p>
           </div>
-          <div className="transfer_card__price">
-            <span className="material-symbols-outlined text-8xl">
+          <div className="transfer_card__price flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl transfer-type--sale">
               arrow_cool_down
             </span>
             <p className="transfer_type">Venta</p>
+            <p className="transfer_amount text-2xl barlow-bold">$ 10.000.000</p>
           </div>
-          <div className="transfer_card__destiny">
+          <div className="transfer_card__destiny flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl">
+              public
+            </span>
+            <p>Otro club</p>
+          </div>
+        </div>
+
+        <div className="transfer_card text-white">
+          <div className="transfer_card__user flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl">
+              face
+            </span>
+            <p>Jugador</p>
+          </div>
+          <div className="transfer_card__price flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl transfer-type--buy">
+              arrow_cool_down
+            </span>
+            <p className="transfer_type">Venta</p>
+            <p className="transfer_amount text-2xl barlow-bold">$ 8.000.000</p>
+          </div>
+          <div className="transfer_card__destiny flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl">
+              public
+            </span>
+            <p>Otro club</p>
+          </div>
+        </div>
+
+        <div className="transfer_card text-white">
+          <div className="transfer_card__user flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl">
+              face
+            </span>
+            <p>Jugador</p>
+          </div>
+          <div className="transfer_card__price flex justify-center flex-col items-center">
+            <span className="material-symbols-outlined text-8xl transfer-type--cession">
+              history
+            </span>
+            <p className="transfer_type">Cesion</p>
+            <p className="transfer_amount text-2xl barlow-bold">$ 0</p>
+          </div>
+          <div className="transfer_card__destiny flex justify-center flex-col items-center">
             <span className="material-symbols-outlined text-8xl">
               public
             </span>

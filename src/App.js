@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home.tsx";
 import Seasons from "./pages/Seasons/Seasons.tsx";
 import Team from "./pages/Team/Team.tsx";
 import Transfers from "./pages/Transfers/Transfers.tsx";
+import YouthQuarry from "./pages/YouthQuarry/YouthQuarry.tsx";
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="team" element={<Team />} />
           <Route path="seasons" element={<Seasons />} />
           <Route path="transfers" element={<Transfers />} />
+          <Route path="youths" element={<YouthQuarry />} />
         </Route>
       </Routes>
     </BrowserRouter>

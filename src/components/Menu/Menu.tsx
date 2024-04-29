@@ -19,6 +19,9 @@ function Menu() {
           <li>
             <Link to="/transfers" className="block p-5 text-white" title="Transferencias">Transferencias</Link>
           </li>
+          <li>
+            <Link to="/youths" className="block p-5 text-white" title="Cantera">Cantera</Link>
+          </li>
         </ul>
       </nav>
 

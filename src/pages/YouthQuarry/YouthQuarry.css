@@ -1,0 +1,43 @@
+.youth-card {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.youth-seassons {
+  position: relative;
+}
+
+.youth-seassons-info {
+  position: absolute;
+  top: 100%;
+  right: 6.2rem;
+  width: 55rem;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: .8rem;
+  z-index: 1;
+  color: #091442;
+  display: none;
+}
+
+.youth-seassons-info.open {
+  display: block;
+}
+
+.youth-seassons-info:before {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 1);
+  top: -.8rem;
+  right: .8rem;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.youth-seassons span {
+  cursor: pointer;
+}
+
+.youth-seassons-info table tbody tr:nth-child(even) {
+  background-color: rgba(9, 20, 66, .2);
+}

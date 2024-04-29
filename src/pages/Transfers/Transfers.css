@@ -3,3 +3,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
+.transfer_card:nth-child(even) {
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.transfer-type--sale {
+  transform: rotate(-90deg);
+}
+
+.transfer-type--buy {
+  transform: rotate(90deg);
+}
