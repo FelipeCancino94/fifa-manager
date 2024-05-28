@@ -5,6 +5,7 @@ import Seasons from "./pages/Seasons/Seasons.tsx";
 import Team from "./pages/Team/Team.tsx";
 import Transfers from "./pages/Transfers/Transfers.tsx";
 import YouthQuarry from "./pages/YouthQuarry/YouthQuarry.tsx";
+import LineUps from "./pages/LineUps/LineUps.tsx";
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="lineups" element={<LineUps />} />
           <Route path="team" element={<Team />} />
           <Route path="seasons" element={<Seasons />} />
           <Route path="transfers" element={<Transfers />} />

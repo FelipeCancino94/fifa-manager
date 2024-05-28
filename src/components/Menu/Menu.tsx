@@ -11,6 +11,9 @@ function Menu() {
             <Link to="/" className="block p-5 text-white" title="Home">Home</Link>
           </li>
           <li>
+            <Link to="/lineups" className="block p-5 text-white" title="Alineacion">Alineacion</Link>
+          </li>
+          <li>
             <Link to="/team" className="block p-5 text-white" title="Plantilla">Plantilla</Link>
           </li>
           <li>

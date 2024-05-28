@@ -1,0 +1,86 @@
+.canvas {
+  display: grid;
+  grid-template-areas:
+    "EI DC DC ED"
+    "MI MCO MCO MD"
+    "LTI DFCI DFCD LTD"
+    "POR POR POR POR";
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.canvas .pos {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.canvas .pos.selected {
+  background-color: aquamarine;
+}
+
+.hide-element {
+  display: none;
+  visibility: hidden;
+}
+
+.pos p,
+.list_of_players p {
+  text-align: center;
+  padding: 1rem;
+  color: #fff;
+}
+
+.pos p:nth-child(odd),
+.list_of_players p:nth-child(odd) {
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.canvas .por {
+  grid-area: POR;
+}
+
+.canvas .lti {
+  grid-area: LTI;
+}
+
+.canvas .dfci {
+  grid-area: DFCI;
+}
+
+.canvas .dfcd {
+  grid-area: DFCD;
+}
+
+.canvas .ltd {
+  grid-area: LTD;
+}
+
+.canvas .mi {
+  grid-area: MI;
+}
+
+.canvas .mco {
+  grid-area: MCO;
+}
+
+.canvas .md {
+  grid-area: MD;
+}
+
+.canvas .ei {
+  grid-area: EI;
+}
+
+.canvas .dc {
+  grid-area: DC;
+}
+
+.canvas .ed {
+  grid-area: ED;
+}
