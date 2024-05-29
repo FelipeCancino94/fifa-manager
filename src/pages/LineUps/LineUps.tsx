@@ -8,8 +8,25 @@ function LineUps() {
 
   function getDataList() {
     const data:any = localStorage.getItem('playerList');
-    console.log(JSON.parse(data));
     lineUpList = JSON.parse(data);
+    return JSON.parse(data);
+  }
+
+  function getLineUpList() {
+    const data:any = localStorage.getItem('lineUpTeam');
+    lineUpList = JSON.parse(data);
+    setTimeout(() => {
+      lineUpList.forEach((player) => {
+        if (player.team_position != undefined) {
+          /* create <p> in formation */
+          const elementP = document.createElement('p');
+          elementP.setAttribute('id', player.id);
+          elementP.innerText = `${player.name} ${player.last_name}`;
+          /* assign text in selected div */
+          document.querySelector(`.canvas .${player.team_position}`)?.appendChild(elementP);
+        }
+      });
+    }, 1000);
     return JSON.parse(data);
   }
 
@@ -37,9 +54,27 @@ function LineUps() {
         element.classList.remove('selected')
       });
     }
-
-    console.log(selectedPlayer);
   }
+
+  function saveLineUp() {
+    localStorage.setItem('lineUpTeam', JSON.stringify(lineUpList));
+  }
+
+  function resetLineUp() {
+    localStorage.removeItem('lineUpTeam');
+    window.location.reload();
+  }
+
+  function initLineUps() {
+    const hasLineUp = localStorage.getItem('lineUpTeam');
+    if (hasLineUp !== null) {
+      getLineUpList();
+    } else {
+      getDataList();
+    }
+  }
+
+  initLineUps();
 
   return (
     <div className="lineups container mx-auto">
@@ -60,10 +95,12 @@ function LineUps() {
         </div>
         <div className="list_of_players basis-1/4 p-8">
         {
-          getDataList().map((player:any) => (
-            <p key={ player.id } id={ `player--${player.id}` } onClick={() => setPlayer(player.id) }>{ player.name } { player.last_name }</p>
+          lineUpList.map((player:any) => (
+            <p key={ player.id } className={player.team_position != undefined && player.team_position != '' ? 'hide-element' : ''} id={ `player--${player.id}` } onClick={() => setPlayer(player.id) }>{ player.name } { player.last_name }</p>
           ))
         }
+        <button className="border-2 rounded-2xl py-4 px-8 mt-8 text-[#091442] bg-white hover:bg-[#091442] hover:text-white hover:border-white transition-all w-full" onClick={ () => saveLineUp() }>Guardar</button>
+        <button className="text-white mt-8 w-full text-center underline decoration-2" onClick={ () => resetLineUp() }>Reiniciar alineaciones</button>
         </div>
       </div>
     </div>
