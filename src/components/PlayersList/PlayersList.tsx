@@ -19,7 +19,7 @@ function PlayersList() {
       const data:any = notCleanData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setPlayers(data);
       localStorage.setItem('playerList', JSON.stringify(data));
-      // console.log(data);
+      console.log(data);
     };
     getPlayers();
   }, []);
