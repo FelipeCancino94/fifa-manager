@@ -1,7 +1,32 @@
 import React from "react";
+
+import { useState, useEffect } from "react";
+import { db } from "../../connections/index.js";
+import { getDocs, collection } from 'firebase/firestore';
+
+import AddAcademyPlayer from "../../components/AddAcademyPlayer/AddAcademyPlayer.tsx";
+
 import './YouthQuarry.css';
 
 function YouthQuarry() {
+
+  const [academyPlayers, setAcademyPlayers] = useState([]);
+  const academyPlayersRef = collection(db, 'academy');
+
+  function toCurrency(value:number):string {
+    return value.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+  }
+
+  useEffect(() => {
+    const getAcademyPlayers = async () => {
+      const notCleanData:any = await getDocs(academyPlayersRef);
+      const data:any = notCleanData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setAcademyPlayers(data);
+      localStorage.setItem('academyPlayersList', JSON.stringify(data));
+      console.log(data);
+    };
+    getAcademyPlayers();
+  }, []);
 
   function toggleInfo(e:any) {
     const target = e.target.getAttribute('data-youth');
@@ -14,68 +39,61 @@ function YouthQuarry() {
         Cantera de Juveniles
       </h1>
       <div className="youth-list">
-        <div className="youth-card grid">
-          <div className="youth-name flex justify-center flex-col items-center">
-            <span className="material-symbols-outlined text-5xl">
-              face
-            </span>
-            <p className="text-3xl">Name</p>
-          </div>
-          <div className="youth-gen flex justify-center flex-col items-center">
-            <p className="text-3xl">GENERAL</p>
-            <p className="text-5xl barlow-bold">45</p>
-          </div>
-          <div className="youth-pot flex justify-center flex-col items-center">
-            <p className="text-3xl">POTENCIAL</p>
-            <p className="text-5xl barlow-bold">89 - 94</p>
-          </div>
-          <div className="youth-seassons flex items-center justify-center">
-            <span className="material-symbols-outlined text-5xl" data-youth="1" onClick={(e) => { toggleInfo(e) }}>
-              info
-            </span>
-            <div className="youth-seassons-info p-3 index-youth--1">
-              <table className="w-full">
-                <thead>
-                  <tr className="text-right">
-                    <th>Año</th>
-                    <th>Temporada</th>
-                    <th>General</th>
-                    <th>Goles</th>
-                    <th>Asistencias</th>
-                    <th>Valor de mercado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="text-right barlow-bold">
-                    <td>1</td>
-                    <td>2023-2024</td>
-                    <td>45</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>$ 500.000</td>
-                  </tr>
-                  <tr className="text-right barlow-bold">
-                    <td>2</td>
-                    <td>2024-2025</td>
-                    <td>50</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>$ 800.000</td>
-                  </tr>
-                  <tr className="text-right barlow-bold">
-                    <td>3</td>
-                    <td>2025-2026</td>
-                    <td>60</td>
-                    <td>5</td>
-                    <td>1</td>
-                    <td>$ 1.100.000</td>
-                  </tr>
-                </tbody>
-              </table>
+        {
+          academyPlayers.map((player:any) => (
+            <div key={ player.id } className="youth-card grid">
+              <div className="youth-name flex justify-center flex-col items-center">
+                <span className="material-symbols-outlined text-5xl">
+                  face
+                </span>
+                <p className="text-3xl">{ player.name } { player.last_name }</p>
+              </div>
+              <div className="youth-gen flex justify-center flex-col items-center">
+                <p className="text-3xl">GENERAL</p>
+                <p className="text-5xl barlow-bold">{ player.general }</p>
+              </div>
+              <div className="youth-pot flex justify-center flex-col items-center">
+                <p className="text-3xl">POTENCIAL</p>
+                <p className="text-5xl barlow-bold">{ player.potential }</p>
+              </div>
+              <div className="youth-seassons flex items-center justify-center">
+                <span className="material-symbols-outlined text-5xl" data-youth="1" onClick={(e) => { toggleInfo(e) }}>
+                  info
+                </span>
+                <div className="youth-seassons-info p-3 index-youth--1">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="text-right">
+                        <th>Año</th>
+                        <th>Temporada</th>
+                        <th>General</th>
+                        <th>Goles</th>
+                        <th>Asistencias</th>
+                        <th>Valor de mercado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        player.seasons.map((season:any) => (
+                          <tr key={ season.year } className="text-right barlow-bold">
+                            <td>{ season.year }</td>
+                            <td>{ season.season }</td>
+                            <td>{ season.general }</td>
+                            <td>{ season.goals }</td>
+                            <td>{ season.assists }</td>
+                            <td>{ toCurrency(season.market_value) }</td>
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
+      <AddAcademyPlayer />
     </div>
   );
 };
