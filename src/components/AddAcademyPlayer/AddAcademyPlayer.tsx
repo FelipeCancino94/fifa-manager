@@ -1,68 +1,94 @@
 import React from "react";
-
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../connections/index.js";
+import '../Modal/Modal.css';
+import './AddAcademyPlayer.css';
 
 
 function AddAcademyPlayer() {
 
-  const MySwal = withReactContent(Swal);
-  const form = () => {
-    return (
-      <div className="form">
-        <div className="row flex justify-between">
-          <div className="form-group flex-initial w-50">
-            <label htmlFor="name" className="text-left w-full block">Nombre</label>
-            <input type="text" id="name" className="border-2 border-x-0 border-y-[#091442] py-3 px-2" />
-          </div>
-          <div className="form-group flex-initial w-50">
-            <label htmlFor="last_name" className="text-left w-full block">Apellido</label>
-            <input type="text" id="last_name" className="border-2 border-x-0 border-y-[#091442] py-3 px-2" />
-          </div>
-        </div>
-        <div className="row flex justify-between">
-          <div className="form-group flex-initial w-50">
-            <label htmlFor="general" className="text-left w-full block">General</label>
-            <input type="number" id="general" className="border-2 border-x-0 border-y-[#091442] py-3 px-2" />
-          </div>
-          <div className="form-group flex-initial w-50">
-            <label htmlFor="potential" className="text-left w-full block">Potencial</label>
-            <input type="text" id="potential" className="border-2 border-x-0 border-y-[#091442] py-3 px-2" />
-          </div>
-        </div>
-      </div>
-    )
+
+  const academyPlayerCollectionRef = collection(db, 'academy');
+
+  const createAcademyPlayer = async () => {
+    const data = {
+      age: Number(document.getElementById('age')?.value),
+      general: Number(document.getElementById('general')?.value),
+      last_name: document.getElementById('last_name')?.value,
+      name: document.getElementById('name')?.value,
+      potential: document.getElementById('potential')?.value,
+      seasons: [
+        {
+          assists: 0,
+          general: Number(document.getElementById('general')?.value),
+          goals: 0,
+          market_value: Number(document.getElementById('market_value')?.value),
+          season: document.getElementById('season')?.value,
+          year: 1
+        }
+      ]
+    };
+    try {
+      await addDoc(academyPlayerCollectionRef, data);
+      window.location.reload();
+    } catch(e) {
+      console.error('Error adding document: ', e);
+    }
   };
 
-  const showModalForm = () => {
-    MySwal.fire({
-      title: <p>Añadir nuevo jugador</p>,
-      html: form(),
-      confirmButtonText: 'Guardar',
-      confirmButtonColor: '#091442',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: 'rgb(148 163 184)',
-      icon: 'info'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        MySwal.fire({
-          title: 'Guardando...',
-          icon: 'warning',
-          didOpen: () => {
-            MySwal.showLoading()
-            // Ejecutar aca la funcion para guardar el formulario, luego crear otro MySwal con la confirmacion de guardado y recargar la pagina
-          },
-        })
-      }
-    });
+  const showModal = () => {
+    document.querySelector('.add_academy_player_modal')?.classList.add('show');
+    setTimeout(() => {
+      document.querySelector('.container-modal')?.classList.add('animate');
+    }, 200);
   }
 
   return (
     <>
       <button className="border bg-white p-5 w-full mt-5">
-        <span className="text-3xl text-[#091442]" onClick={ () => showModalForm() }>Add academy player</span>
+        <span className="text-3xl text-[#091442]" onClick={ () => showModal() }>Add academy player</span>
       </button>
+      <div className="modal add_academy_player_modal">
+        <div className="container-modal">
+          <div className="content-modal">
+            <div className="form">
+              <h3 className="text-black text-4xl text-center">Añadir Jugador</h3>
+              <div className="row flex justify-between">
+                <div className="form-group flex-initial w-50">
+                  <input type="number" id="age" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Edad" />
+                </div>
+              </div>
+              <div className="row flex justify-between">
+                <div className="form-group flex-initial w-50">
+                  <input type="text" id="name" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Nombre" />
+                </div>
+                <div className="form-group flex-initial w-50">
+                  <input type="text" id="last_name" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Apellido" />
+                </div>
+              </div>
+              <div className="row flex justify-between">
+                <div className="form-group flex-initial w-50">
+                  <input type="number" id="general" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="General" />
+                </div>
+                <div className="form-group flex-initial w-50">
+                  <input type="text" id="potential" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Potencial" />
+                </div>
+              </div>
+              <div className="row flex justify-between">
+                <div className="form-group flex-initial w-50">
+                  <input type="text" id="season" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Temporada" />
+                </div>
+                <div className="form-group flex-initial w-50">
+                  <input type="number" id="market_value" className="border-2 border-x-0 border-b-[#091442] text-black border-t-0 py-3 px-2" placeholder="Valor de mercado" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="footer-modal">
+            <button className="confirm-btn bg-blue-800 py-3 px-5 rounded-lg mt-5" onClick={ () => { createAcademyPlayer() } }>Guardar</button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

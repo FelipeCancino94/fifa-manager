@@ -57,10 +57,10 @@ function YouthQuarry() {
                 <p className="text-5xl barlow-bold">{ player.potential }</p>
               </div>
               <div className="youth-seassons flex items-center justify-center">
-                <span className="material-symbols-outlined text-5xl" data-youth="1" onClick={(e) => { toggleInfo(e) }}>
+                <span className="material-symbols-outlined text-5xl" data-youth={ player.id } onClick={(e) => { toggleInfo(e) }}>
                   info
                 </span>
-                <div className="youth-seassons-info p-3 index-youth--1">
+                <div className={ `youth-seassons-info p-3 index-youth--${ player.id }` }>
                   <table className="w-full">
                     <thead>
                       <tr className="text-right">
