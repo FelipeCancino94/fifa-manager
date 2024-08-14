@@ -39,7 +39,7 @@ function AddAcademyPlayer() {
   const showModal = () => {
     document.querySelector('.add_academy_player_modal')?.classList.add('show');
     setTimeout(() => {
-      document.querySelector('.container-modal')?.classList.add('animate');
+      document.querySelector('.add_academy_player_modal .container-modal')?.classList.add('animate');
     }, 200);
   }
 

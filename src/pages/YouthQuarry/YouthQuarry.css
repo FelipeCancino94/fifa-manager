@@ -29,7 +29,7 @@
   height: 2rem;
   background-color: rgba(255, 255, 255, 1);
   top: -.8rem;
-  right: .8rem;
+  right: 3rem;
   transform: rotate(45deg);
   z-index: -1;
 }
