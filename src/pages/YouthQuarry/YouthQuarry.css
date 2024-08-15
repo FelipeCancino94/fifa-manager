@@ -1,5 +1,32 @@
 .youth-card {
   grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.youth-card.player-sold {
+  opacity: .2;
+}
+
+.youth-card.player-sold:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, .3);
+}
+
+.youth-card.player-sold:after {
+  content: "VENDIDO";
+  position: absolute;
+  font-size: 11.5rem;
+  line-height: .6;
+  color: rgba(0, 0, 0, .5);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .youth-seassons {
@@ -29,7 +56,7 @@
   height: 2rem;
   background-color: rgba(255, 255, 255, 1);
   top: -.8rem;
-  right: 3rem;
+  right: 5rem;
   transform: rotate(45deg);
   z-index: -1;
 }

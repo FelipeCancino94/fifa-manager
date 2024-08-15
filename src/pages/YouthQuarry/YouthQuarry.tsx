@@ -89,6 +89,33 @@ function YouthQuarry() {
     return Math.max(...seasons.map(o => o.general));
   }
 
+  const showModalSellPlayer = (id:string) => {
+    document.querySelector('.sell-player-modal')?.classList.add('show');
+    setTimeout(() => {
+      document.querySelector('.sell-player-modal .container-modal')?.classList.add('animate');
+    }, 200);
+    document.getElementById('sell_player_id_player').value = id;
+  }
+
+  const closeModal = (idModal:string) => {
+    document.querySelector(`${ idModal } .container-modal`)?.classList.remove('animate');
+    document.querySelector(idModal)?.classList.remove('show');
+  }
+
+  const sellPlayer = async () => {
+    const idPlayer = document.getElementById('sell_player_id_player').value;
+    const batch = writeBatch(db);
+    const playerRef = doc(db, 'academy', idPlayer);
+    try {
+      batch.update(playerRef, {"player_status": 'sold'});
+      await batch.commit();
+    } catch (error) {
+      console.error('No es posible vender al jugador: ', error);
+    } finally {
+      window.location.reload();
+    }
+  }
+
   return (
     <div className="youth-quarry text-white container mx-auto">
       <h1 className="text-3xl text-left text-white px-5 flex items-center mb-8">
@@ -97,7 +124,7 @@ function YouthQuarry() {
       <div className="youth-list">
         {
           academyPlayers.map((player:any) => (
-            <div key={ player.id } className="youth-card grid py-5" id={ player.id }>
+            <div key={ player.id } className={`youth-card grid py-5 ${ player.player_status == 'sold' ? 'player-sold' : '' }`} id={ player.id }>
               <div className="youth-name flex justify-center flex-col items-center">
                 <span className="material-symbols-outlined text-5xl">
                   face
@@ -118,6 +145,9 @@ function YouthQuarry() {
                 </span>
                 <span className="material-symbols-outlined text-5xl ml-5" onClick={ () => { showModal(player.id) } }>
                   data_saver_on
+                </span>
+                <span className="material-symbols-outlined text-5xl ml-5" onClick={ () => { showModalSellPlayer(player.id) } }>
+                  sell
                 </span>
                 <div className={ `youth-seassons-info p-3 index-youth--${ player.id }` }>
                   <table className="w-full">
@@ -194,6 +224,16 @@ function YouthQuarry() {
           </div>
           <div className="footer-modal">
           <button className="confirm-btn bg-blue-800 py-3 px-5 rounded-lg mt-5" onClick={ () => addSeasonToAcademyPlayer() }>Guardar</button>
+          </div>
+        </div>
+      </div>
+      <div className="modal sell-player-modal">
+        <div className="container-modal">
+          <div className="content-modal text-center">
+            <h3 className="text-black text-4xl text-center mb-5">Seguro quieres vender este jugador ?</h3>
+            <input type="hidden" id="sell_player_id_player" />
+            <button className="text-5xl text-center px-5 py-3 rounded-lg bg-blue-800 mr-5" onClick={ () => { sellPlayer() } }>Vender</button>
+            <button className="text-5xl text-center px-5 py-3 rounded-lg bg-gray-300" onClick={ () => { closeModal('.sell-player-modal') } }>Cancelar</button>
           </div>
         </div>
       </div>
