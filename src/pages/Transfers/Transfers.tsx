@@ -57,7 +57,7 @@ function Transfers() {
                   { player.transfer_type === 'cesion'
                     || player.transfer_type === 'cesion-buy'
                     || player.transfer_type === 'cesion-sale'
-                    ? 'history' : 'arrow_cool_down' }
+                    ? 'history' : player.transfer_type == 'end-contract' ? 'article_shortcut' : 'arrow_cool_down' }
                 </span>
                 <p className="transfer_type">{ player.transfer_type }</p>
                 <p className="transfer_amount text-2xl barlow-bold">{ toCurrency(player.transfer_amount) }</p>
