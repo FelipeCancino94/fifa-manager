@@ -43,6 +43,11 @@ function AddAcademyPlayer() {
     }, 200);
   }
 
+  const closeModal = () => {
+    document.querySelector('.add_academy_player_modal')?.classList.remove('show');
+    document.querySelector('.add_academy_player_modal .container-modal')?.classList.remove('animate');
+  } 
+
   return (
     <>
       <button className="border bg-white p-5 w-full mt-5">
@@ -86,6 +91,7 @@ function AddAcademyPlayer() {
           </div>
           <div className="footer-modal">
             <button className="confirm-btn bg-blue-800 py-3 px-5 rounded-lg mt-5" onClick={ () => { createAcademyPlayer() } }>Guardar</button>
+            <button className="confirm-btn bg-gray-300 py-3 px-5 rounded-lg mt-5 ml-5" onClick={ () => { closeModal() } }>Cancelar</button>
           </div>
         </div>
       </div>

@@ -223,7 +223,8 @@ function YouthQuarry() {
             </div>
           </div>
           <div className="footer-modal">
-          <button className="confirm-btn bg-blue-800 py-3 px-5 rounded-lg mt-5" onClick={ () => addSeasonToAcademyPlayer() }>Guardar</button>
+            <button className="confirm-btn bg-blue-800 py-3 px-5 rounded-lg mt-5" onClick={ () => addSeasonToAcademyPlayer() }>Guardar</button>
+            <button className="confirm-btn bg-gray-300 py-3 px-5 rounded-lg mt-5 ml-5" onClick={ () => closeModal('.stats-form-modal') }>Cancelar</button>
           </div>
         </div>
       </div>
