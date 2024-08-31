@@ -1,84 +1,53 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../connections/index.js";
+import SeasonAccordion from "../../components/SeasonAccordion/SeasonAccordion.tsx";
 import './Seasons.css';
 
 function Seasons() {
+  const [seasons, setSeasons] = useState<Array<Season> | null>([]);
 
-  function toggleAccordion(element) {
-    element.target.closest('.season').classList.toggle('open');
-  };
+  interface Competences {
+    competence: string;
+    goals: number;
+    goals_conceded: number;
+    position: string;
+    winner: boolean;
+  }
+  interface Season {
+    id: string;
+    season: string;
+    competences: Array<Competences>;
+  }
+
+  useEffect(() => {
+    const getSeasons = async () => {
+      const seasonsRef = collection(db, 'seasons');
+      const query = await getDocs(seasonsRef);
+      const data:Array<object> = query.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setSeasons(data);
+      console.log(data);
+    }
+    getSeasons();
+  }, []);
 
   return (
     <div className="seasons container mx-auto">
       <div className="total_seasons px-5">
         <h1 className="text-3xl text-center">Temporadas</h1>
-        <p className="text-8xl text-center">3</p>
+        <p className="text-8xl text-center">{ seasons?.length }</p>
       </div>
       <div className="seasons_list px-5">
-        <div className="season mb-3 p-5" onClick={ (element) => toggleAccordion(element) }>
-          <div className="season__heading flex items-center justify-between">
-            <h2>Temporada 2024 - 2025</h2>
-            <span className="material-symbols-outlined text-4xl">expand_more</span>
-          </div>
-          <div className="season__content">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <th>Competencia</th>
-                  <th>Posicion</th>
-                  <th>G</th>
-                  <th>GR</th>
-                  <th>Dif</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="barlow-bold">Champions</td>
-                  <td className="barlow-bold">Primera ronda</td>
-                  <td className="barlow-bold">8</td>
-                  <td className="barlow-bold">10</td>
-                  <td className="barlow-bold">-2</td>
-                </tr>
-                <tr>
-                  <td className="barlow-bold">Serie A</td>
-                  <td className="barlow-bold">2º</td>
-                  <td className="barlow-bold">30</td>
-                  <td className="barlow-bold">20</td>
-                  <td className="barlow-bold">10</td>
-                </tr>
-                <tr>
-                  <td className="barlow-bold">Copa italia</td>
-                  <td className="barlow-bold">
-                    <span className="material-symbols-outlined">trophy</span>
-                  </td>
-                  <td className="barlow-bold">30</td>
-                  <td className="barlow-bold">20</td>
-                  <td className="barlow-bold">10</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="season mb-3 p-5" onClick={ (element) => toggleAccordion(element) }>
-          <div className="season__heading flex items-center justify-between">
-            <h2>Temporada 2024 - 2025</h2>
-            <span className="material-symbols-outlined text-4xl">expand_more</span>
-          </div>
-          <div className="season__content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odio culpa. Cumque, molestiae perspiciatis. Itaque labore repellendus nisi quibusdam similique? Natus voluptatum debitis excepturi sint dignissimos deleniti repellat blanditiis amet.</p>
-          </div>
-        </div>
-
-        <div className="season mb-3 p-5" onClick={ (element) => toggleAccordion(element) }>
-          <div className="season__heading flex items-center justify-between">
-            <h2>Temporada 2024 - 2025</h2>
-            <span className="material-symbols-outlined text-4xl">expand_more</span>
-          </div>
-          <div className="season__content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odio culpa. Cumque, molestiae perspiciatis. Itaque labore repellendus nisi quibusdam similique? Natus voluptatum debitis excepturi sint dignissimos deleniti repellat blanditiis amet.</p>
-          </div>
-        </div>
-
+        {
+          seasons?.map((season) => (
+            <SeasonAccordion
+              key={ season.id }
+              id={ season.id }
+              season={ season.season }
+              competences={ season.competences } />
+          ))
+        }
       </div>
     </div>
   );

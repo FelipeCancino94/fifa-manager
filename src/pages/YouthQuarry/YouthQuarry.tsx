@@ -12,13 +12,13 @@ import '../../components/Modal/Modal.css';
 function YouthQuarry() {
 
   const [academyPlayers, setAcademyPlayers] = useState([]);
-  const academyPlayersRef = collection(db, 'academy');
 
   function toCurrency(value:number):string {
     return value.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
   }
 
   useEffect(() => {
+    const academyPlayersRef = collection(db, 'academy');
     const getAcademyPlayers = async () => {
       const notCleanData:any = await getDocs(academyPlayersRef);
       const data:any = notCleanData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -124,7 +124,7 @@ function YouthQuarry() {
       <div className="youth-list">
         {
           academyPlayers.map((player:any) => (
-            <div key={ player.id } className={`youth-card grid py-5 ${ player.player_status == 'sold' ? 'player-sold' : '' }`} id={ player.id }>
+            <div key={ player.id } className={`youth-card grid py-5 ${ player.player_status === 'sold' ? 'player-sold' : '' }`} id={ player.id }>
               <div className="youth-name flex justify-center flex-col items-center">
                 <span className="material-symbols-outlined text-5xl">
                   face
