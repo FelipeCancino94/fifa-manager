@@ -1,3 +1,28 @@
 .player-item:nth-child(even) {
   background-color: rgba(0, 0, 0, .2);
 }
+
+.player-item p input {
+  background: none;
+  text-align: center;
+  width: 100%;
+  margin-left: 8px;
+  border: 1px solid #fff;
+}
+
+.controls {
+  position: relative;
+}
+
+.edited-controls {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100px;
+}
+
+.edited-controls.show {
+  display: block;
+}
